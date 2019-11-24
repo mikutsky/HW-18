@@ -3,7 +3,8 @@
     <img alt="Todo logo" src="./assets/logo.png" />
     <b-card class="text-center mt-4">
       <div>
-        <b-form>
+        <!-- Обрабатывать события лучше через Submit и Reset формы -->
+        <b-form @submit.prevent="onAdd" @reset.prevent="onReset">
           <b-form-group
             id="input-group-1"
             label="Title:"
@@ -36,10 +37,10 @@
             </b-form-checkbox>
           </b-form-group>
           <b-form-group id="input-group-4">
-            <b-button type="submit" variant="primary" @click.prevent="onAdd">
+            <b-button type="submit" variant="primary">
               Add
             </b-button>
-            <b-button type="reset" variant="danger" @ckick.prevent="onReset">
+            <b-button type="reset" variant="danger">
               Reset
             </b-button>
           </b-form-group>
@@ -110,7 +111,7 @@ export default {
   }),
   methods: {
     onAdd (evn) {
-      if (!this.form.title) return alert('Please input Title!')
+      // if (!this.form.title) return alert('Please input Title!')
       const { title, body, completed } = this.form
       this.tasks.push({ title, body, completed })
       this.onReset()
